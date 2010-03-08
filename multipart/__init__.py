@@ -2,8 +2,7 @@ import datetime
 import mimetypes
 import cStringIO
 import StringIO
-
-from cStringIO import StringIO
+from cStringIO import StringIO as strio
 
 def get_content_type_and_body(fields, files={}):
     boundary = '------BOUNDARY-%d'%datetime.datetime.now().microsecond
@@ -19,8 +18,8 @@ def get_content_type_and_body(fields, files={}):
         ]
     for filename, value in files.iteritems():
         if isinstance(value, file):
-            value = StringIO(file.read())
-        if not isinstance(value, (cStringIO.StringIO, StringIO.StringIO)):
+            value = strio(value.read())
+        if not isinstance(value, (cStringIO.InputType, StringIO.StringIO)):
             raise ValueError, "Files must be of type <StringIO> or <file>"
 
         items += [
