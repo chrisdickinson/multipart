@@ -1,5 +1,8 @@
 import datetime
 import mimetypes
+import cStringIO
+import StringIO
+
 from cStringIO import StringIO
 
 def get_content_type_and_body(fields, files={}):
