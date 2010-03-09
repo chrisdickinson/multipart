@@ -13,9 +13,10 @@ the two functions are as follows:
 you'll usually want to use `get_headers_and_body`. you supply two dicts --
 one of the fields you want to send, and one of the files you want to send,
 where the keys of the file dict correspond to file names, and the values of
-the file dict are either `file` objects or `StringIO` objects. It returns
-a mime-encoded body and a set of headers. You'll need to set your own
-user agent and Http methods.
+the file dict are a tuple of either `file` objects or `StringIO` objects and
+their names; e.g. `{ 'image': ("filename.png", <file object>) }` 
+It returns a mime-encoded body and a set of headers. You'll need to set 
+your own user agent and Http methods.
 
 Tests are forthcoming; pretty much everything is forthcoming; this
 release is so rough that nine out of ten Hell's Angels show unwavering

@@ -16,7 +16,8 @@ def get_content_type_and_body(fields, files={}):
             '',
             str(value),
         ]
-    for filename, value in files.iteritems():
+    for key, values in files.iteritems():
+        filename, value = values
         if isinstance(value, file):
             value = strio(value.read())
         if not isinstance(value, (cStringIO.InputType, StringIO.StringIO)):
@@ -24,7 +25,7 @@ def get_content_type_and_body(fields, files={}):
 
         items += [
             ''.join(['--', boundary]),
-            'Content-Disposition: form-data; filename="%s"' % str(filename),
+            'Content-Disposition: form-data; name="%s"; filename="%s"' % (str(key), str(filename)),
             'Content-Type: %s' % (mimetypes.guess_type(filename)[0] or 'application/octet-stream'),
             '',
             value.getvalue(),
